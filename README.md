@@ -6,6 +6,7 @@ This study guide covers the foundational concepts and practical commands of Git 
 
 - [Git and GitHub: A Foundation Guide to Learning](#git-and-github-a-foundation-guide-to-learning)
   - [TOC](#toc)
+  - [Additional resources](#additional-resources)
   - [I. Short Answer Quiz](#i-short-answer-quiz)
   - [II. Quiz Answer Key](#ii-quiz-answer-key)
   - [III. Essay Format Questions](#iii-essay-format-questions)
@@ -23,6 +24,36 @@ This study guide covers the foundational concepts and practical commands of Git 
       - [Purpose of an Upstream Branch](#purpose-of-an-upstream-branch)
       - [How to Set Upstream](#how-to-set-upstream)
       - [Pushing Changes to Origin After Merging from Upstream](#pushing-changes-to-origin-after-merging-from-upstream)
+    - [Basic Git Commands](#basic-git-commands)
+      - [git init](#git-init)
+      - [git clone](#git-clone)
+      - [git status](#git-status)
+      - [git add](#git-add)
+      - [git commit](#git-commit)
+      - [git log](#git-log)
+      - [git branch](#git-branch)
+      - [git checkout](#git-checkout)
+      - [git merge](#git-merge)
+      - [git pull](#git-pull)
+      - [git push](#git-push)
+      - [git remote](#git-remote)
+      - [git fetch](#git-fetch)
+      - [git reset](#git-reset)
+      - [git stash](#git-stash)
+      - [git diff](#git-diff)
+    - [Git Aliases](#git-aliases)
+      - [Setting Up Git Aliases](#setting-up-git-aliases)
+      - [Commonly Used Git Aliases](#commonly-used-git-aliases)
+        - [Basic Command Shortcuts](#basic-command-shortcuts)
+        - [Enhanced Log Commands](#enhanced-log-commands)
+        - [Workflow Enhancers](#workflow-enhancers)
+        - [Branch Management](#branch-management)
+      - [Viewing Your Aliases](#viewing-your-aliases)
+      - [Removing Aliases](#removing-aliases)
+
+## Additional resources
+
+- [Markdown Guide: Basic Syntax](https://www.markdownguide.org/basic-syntax/)
 
 ## I. Short Answer Quiz
 
@@ -167,7 +198,7 @@ The Git workflow involves a series of steps to manage changes in your project:
     - Which branch you are currently on.
     - Which files have been modified.
     - Which files are staged for the next commit.
-    - Which files are **untracked** (files in your working directory that Git is not currently monitoring).
+    - Which files are untracked.
 2. **Staging Changes (`git add`):** Before changes can be committed (saved), they must be moved to the **staging area (or index)**. This is an intermediate area where changes are prepared.
     - **`git add <filename>`:** This command **stages a specific file** for the next commit, meaning only changes in that particular file will be included.
     - **`git add .`:** This command **stages all new and modified files** in the current directory and its subdirectories, preparing them all for the next commit.
@@ -243,3 +274,361 @@ In a typical fork workflow:
 3. Your fork is set up as "origin"
 4. You periodically fetch and merge changes from upstream
 5. After merging those changes locally, you need to update your fork
+
+### Basic Git Commands
+
+#### git init
+
+Initializes a new Git repository in the current directory, creating the hidden `.git` folder that tracks all changes.
+
+```bash
+# Create a new Git repository
+git init
+
+# Output
+Initialized empty Git repository in /path/to/your/project/.git/
+```
+
+#### git clone
+
+Creates a copy of a remote repository on your local machine, including all files, branches, and commit history.
+
+```bash
+# Clone a repository from GitHub
+git clone https://github.com/username/repository.git
+
+# Clone to a specific folder
+git clone https://github.com/username/repository.git my-project-folder
+```
+
+#### git status
+
+Shows the current state of your working directory - which files are modified, staged, or untracked.
+
+```bash
+git status
+
+# Output example
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   README.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        new-file.txt
+```
+
+#### git add
+
+Adds file changes to the staging area, preparing them for the next commit.
+
+```bash
+# Add a specific file
+git add filename.txt
+
+# Add all modified and new files
+git add .
+
+# Add specific file types
+git add *.js
+```
+
+#### git commit
+
+Records the changes in the repository's history with a descriptive message.
+
+```bash
+# Commit with a message
+git commit -m "Add login functionality"
+
+# Commit all modified tracked files without staging
+git commit -am "Fix typos in documentation"
+```
+
+#### git log
+
+Displays the commit history, showing commit hashes, authors, dates, and messages.
+
+```bash
+# View commit history
+git log
+
+# Show simplified one-line history
+git log --oneline
+
+# Show graphical representation of branch history
+git log --graph --oneline --all
+```
+
+#### git branch
+
+Lists, creates, or deletes branches in your repository.
+
+```bash
+# List all local branches (* marks current branch)
+git branch
+
+# Create a new branch
+git branch feature-login
+
+# Delete a branch
+git branch -d feature-login
+
+# List remote branches
+git branch -r
+```
+
+#### git checkout
+
+Switches between branches or restores files from a specific commit.
+
+```bash
+# Switch to an existing branch
+git checkout develop
+
+# Create and switch to a new branch
+git checkout -b feature-navbar
+
+# Discard changes in a file
+git checkout -- filename.txt
+```
+
+#### git merge
+
+Combines changes from different branches together.
+
+```bash
+# Merge a branch into your current branch
+git checkout main
+git merge feature-login
+```
+
+#### git pull
+
+Fetches changes from a remote repository and integrates them into your current branch.
+
+```bash
+# Pull changes from origin remote
+git pull origin main
+
+# Pull with rebase instead of merge
+git pull --rebase origin main
+```
+
+#### git push
+
+Uploads local repository changes to the remote repository.
+
+```bash
+# Push changes to remote
+git push origin main
+
+# Push and set upstream branch
+git push -u origin feature-search
+```
+
+#### git remote
+
+Manages the set of remote repositories you're tracking.
+
+```bash
+# View remote repositories
+git remote -v
+
+# Add a new remote
+git remote add upstream https://github.com/original-owner/original-repo.git
+
+# Remove a remote
+git remote remove upstream
+```
+
+#### git fetch
+
+Downloads objects and refs from a remote repository without merging.
+
+```bash
+# Fetch from origin
+git fetch origin
+
+# Fetch from all remotes
+git fetch --all
+```
+
+#### git reset
+
+Resets the current HEAD to the specified state, with different modes affecting staging area and working directory.
+
+```bash
+# Unstage files but keep changes
+git reset HEAD filename.txt
+
+# Reset to a specific commit, preserving changes as unstaged
+git reset a1b2c3d4
+
+# Hard reset to a specific commit (discards all changes)
+git reset --hard a1b2c3d4
+```
+
+#### git stash
+
+Temporarily saves changes that you don't want to commit immediately.
+
+```bash
+# Stash current changes
+git stash
+
+# List stashes
+git stash list
+
+# Apply most recent stash
+git stash apply
+
+# Apply specific stash
+git stash apply stash@{2}
+
+# Remove most recent stash after applying
+git stash pop
+```
+
+#### git diff
+
+Shows changes between commits, commit and working tree, etc.
+
+```bash
+# Show unstaged changes
+git diff
+
+# Show staged changes
+git diff --staged
+
+# Compare two branches
+git diff main..feature-branch
+```
+
+### Git Aliases
+
+Git aliases allow you to create shortcuts for frequently used Git commands. They save time and improve productivity by reducing the amount of typing needed for common operations.
+
+#### Setting Up Git Aliases
+
+Git aliases are created using the `git config` command with the `--global` flag to make them available across all your repositories.
+
+```bash
+git config --global alias.<shortcut> '<command>'
+```
+
+#### Commonly Used Git Aliases
+
+Here are some useful Git aliases that many developers incorporate into their workflow:
+
+##### Basic Command Shortcuts
+
+```bash
+# Create shorter versions of common commands
+git config --global alias.co 'checkout'
+git config --global alias.br 'branch'
+git config --global alias.ci 'commit'
+git config --global alias.st 'status'
+git config --global alias.unstage 'reset HEAD --'
+```
+
+Usage examples:
+
+```bash
+git co main        # Instead of git checkout main
+git br -a          # Instead of git branch -a
+git ci -m "Fix bug" # Instead of git commit -m "Fix bug"
+git st             # Instead of git status
+git unstage file.txt # Instead of git reset HEAD -- file.txt
+```
+
+##### Enhanced Log Commands
+
+```bash
+# One-line log with decorations showing branches and tags
+git config --global alias.lg 'log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+
+# Show last commit
+git config --global alias.last 'log -1 HEAD'
+
+# Show all commits as a simplified tree
+git config --global alias.tree 'log --graph --oneline --all'
+```
+
+Usage examples:
+
+```bash
+git lg             # Shows decorated commit history
+git last           # Shows details of the most recent commit
+git tree           # Shows a graphical representation of all branches
+```
+
+##### Workflow Enhancers
+
+```bash
+# Show changes in a compact way
+git config --global alias.df 'diff --color --color-words --abbrev'
+
+# Amend the previous commit without changing the commit message
+git config --global alias.amend 'commit --amend --no-edit'
+
+# Show all configured aliases
+git config --global alias.aliases '!git config --get-regexp alias'
+
+# Undo the last commit but keep changes
+git config --global alias.undo 'reset --soft HEAD~1'
+```
+
+Usage examples:
+
+```bash
+git df             # Shows colorized word-by-word diff
+git amend          # Updates the last commit with staged changes
+git aliases        # Lists all your configured Git aliases
+git undo           # Undoes the last commit while preserving changes
+```
+
+##### Branch Management
+
+```bash
+# Clean up local branches that have been merged
+git config --global alias.cleanup '!git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
+
+# Show all branches with last commit date
+git config --global alias.recent 'for-each-ref --sort=-committerdate --format="%(committerdate:short) %(refname:short)" refs/heads/'
+```
+
+Usage examples:
+
+```bash
+git cleanup        # Removes merged branches
+git recent         # Shows branches sorted by latest commit
+```
+
+#### Viewing Your Aliases
+
+To see all configured aliases:
+
+```bash
+git config --list | grep alias
+# or if you set the 'aliases' alias above
+git aliases
+```
+
+#### Removing Aliases
+
+To remove an alias:
+
+```bash
+git config --global --unset alias.<shortcut>
+```
+
+Example:
+
+```bash
+git config --global --unset alias.co  # Removes the 'co' alias
+```
